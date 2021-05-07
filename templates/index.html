@@ -1,0 +1,110 @@
+{% extends 'default.html' %}
+
+<!-- [ NOM DE PAGE ] -->
+{% set page = "Gestion du compte Github de " + session['user']['nom'] %}
+
+{% block content %}
+
+    <!-- ################ [ HEADER ] ################ -->
+
+    <div id="entete">
+        <!-- [ LOGO + LOGOUT ] -->
+        <table id="enteTable">
+            <tr><td><div id="flask"></div></td></tr>
+            <tr><td>{% include 'logout.html' %}</td></tr>
+        </table>
+        <!-- [ TITRE ] -->
+        <h1>{% block title %}Prototype v1.0{% endblock %}</h1>
+        <!-- [ NOM DE PAGE ] -->
+        <div id="page">{{ page }}</div>
+        <!-- [ ALERTES ] -->
+        <div class="alerte indics">
+            {% if alerte %}
+                {% print(alerte) %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- ################ [ CONTENU ] ################ -->
+
+    <div id="contenu">
+
+        <!-- ======== [ PROGRAMME ] ======== -->
+
+        <!-- ---- [ CARDE GAUCHE : COMMANDE D'AJOUTS ] ---- -->
+
+        <div id="cadreG">
+            <h3>Ajouter des repositories :</h3>
+            <div id="cadreG_form">
+                <!-- FORMULAIRE D'AJOUT -->
+                <form action="" method="POST" name="creation">
+                <input id="inp_reponom" name="reponom" placeholder="Nom" required="required">
+                <br>
+                <table id="formTab">
+                    <tr>
+                        <td class="formTab_label">
+                            {% set title = "Les repos créés seront suffixés numériquement si leur nombre dépasse 1." %}
+                            <div class="help hoverpacity" title="{{ title }}"></div>
+                            Nombre :
+                        </td>
+                        <td class="formTab_input">
+                            <input id="inp_reponbr" type="number" name="reponbr" min=1 max=50 value=1>
+                        </td>
+                    </tr>
+                </table>
+                <input id="inp_nmadmin" name="nmadmin" placeholder="Administrateur additionnel (facultatif)">
+                <br>
+                    <input id="btn_submit" class="btn" type="submit" value="Envoyer">
+            </form>
+            </div>
+            <br>
+            <div id="rapport">{{ rapport }}</div>
+        </div>
+
+        <!-- ---- [ CARDE DROIT : LISTING ] ---- -->
+
+        <script>
+            // Changement au clic en "Wait" du texte du bouton "Gérer".
+            function changeTexte() {
+                document.getElementById("btn_gerer").innerHTML = 'Wait ...'; }
+        </script>
+
+        <div id="cadreD">
+            <a id="btn_gerer" class="boutonUtil fright pointer" onClick="changeTexte();" href="{{ url_for('gestion') }}"
+               style="text-decoration: none; color: #555555;">
+                Gérer
+            </a>
+            <h3>Liste des repos actifs :</h3>
+            <div id="cadreD_list">
+                <table id="table_liste" cellspacing="0" cellpadding="0">
+                    {% if(liste != False) %}
+                        {% for repo in liste %}
+                            <tr>
+                                <td class="lisTd1 nowrap">
+                                    <a href="{{ repo['url'] }}" target="_blank">{{ repo["nom"] }}</a>
+                                </td>
+                                <td class="lisTd2">
+                                    {% set title = "Statut du repo" %}
+                                    {% if private %}
+                                        <span class="vert pointer" title=" {{ title }}">Public</span>
+                                    {% else %}
+                                        <span class="rouge pointer" title=" {{ title }}">Private</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                       {% endfor %}
+                    {% elif not liste %}
+                        {% set empty = "(Aucun repository affichable)" %}
+                        <tr><td id="empty">{{ empty }}</td></tr>
+                    {% else %}
+                        <tr><td id="message">{{ message }}</td></tr>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+
+        <!-- =============================== -->
+
+    </div>
+
+{% endblock %}

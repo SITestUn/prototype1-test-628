@@ -1,0 +1,181 @@
+{% extends 'default.html' %}
+
+<!-- [ NOM DE PAGE ] -->
+{% set page = "Gestion du compte Github de " + session['user']['nom'] %}
+
+{% block content %}
+
+    <!-- ################ [ HEADER ] ################ -->
+
+    <div id="entete">
+        <!-- [ LOGO + LOGOUT ] -->
+        <table id="enteTable">
+            <tr><td><div id="flask"></div></td></tr>
+            <tr><td>{% include 'logout.html' %}</td></tr>
+        </table>
+        <!-- [ TITRE ] -->
+        <h1>{% block title %}Prototype v1.0{% endblock %}</h1>
+        <!-- [ NOM DE PAGE ] -->
+        <div id="page">{{ page }}</div>
+        <!-- [ ALERTES ] -->
+        <div class="alerte indics">
+            {% if alerte %}
+                {% print(alerte) %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- ################ [ CONTENU ] ################ -->
+
+    <div id="contenu">
+
+        <!-- ======== [ PROGRAMME ] ======== -->
+
+        <!-- ---- [ LIGNE D'ENTETE ] ---- -->
+
+        <div id="GestEntete" class="marginctr">
+
+            <script>
+                // Changement au clic en "Wait" du texte du bouton "Retour".
+                function changeTexte() {
+                    document.getElementById("btn_retour").innerHTML = 'Wait ...'; }
+            </script>
+
+            <div class="coinDentete fleft">
+                <a id="btn_retour" class="boutonUtil pointer" onClick="changeTexte();" href="{{ url_for('index') }}"
+                   style="text-decoration: none; color: #555555;">
+                    <span style="margin-right: 2px;">◄</span> Retour
+                </a>
+            </div>
+            <div id="div_GEnt">
+                <div class="titre_GEnt">Gérer les repositories :</div>
+                {% set texte = "" %}
+                {% set couleur = "bleu" %}
+                {% if message != "" %}
+                    {% set couleur = "rouge" %}
+                    {% set texte = message %}
+                {% elif rapport != "" %}
+                    {% set texte = rapport %}
+                {% endif %}
+                <div id="messaGEnt" class="{{ couleur }}">{{ texte }}</div>
+            </div>
+            <div class="coinDentete alright">
+                <!-- OPTIONS D'AFFICHAGE -->
+                <script>
+                    // Récupération de la valeur du listbox pour gérer l'affichage des repos.
+                    function affichage()
+                    {
+                        // Choix sélectionné dans le listbox :
+                        var select = document.getElementById("choixaffichage");
+                        var choix  = select.options[select.selectedIndex].value;
+
+                        // Mémorisation du choix courant dans un input caché du form plus bas :
+                        document.getElementById("memoireAffichage").value = choix;
+
+                        // Affichage en conséquence via CSS display :
+                        if(choix === '0') // Si NORMAL
+                        {
+                            for (let r of document.querySelectorAll('.Pub.case_repo')) r.style.display = 'inline-block';
+                            for (let r of document.querySelectorAll('.Pri.case_repo')) r.style.display = 'inline-block';
+                            for (let r of document.querySelectorAll('.Arc.case_repo')) r.style.display = 'none';
+                        }
+                        else if(choix === '1') // Si ARCHIVES
+                        {
+                            for (let r of document.querySelectorAll('.Pub.case_repo')) r.style.display = 'none';
+                            for (let r of document.querySelectorAll('.Pri.case_repo')) r.style.display = 'none';
+                            for (let r of document.querySelectorAll('.Arc.case_repo')) r.style.display = 'inline-block';
+                        }
+                        else if(choix === '2') // Si TOUS
+                        {
+                            for (let r of document.querySelectorAll('.Pub.case_repo')) r.style.display = 'inline-block';
+                            for (let r of document.querySelectorAll('.Pri.case_repo')) r.style.display = 'inline-block';
+                            for (let r of document.querySelectorAll('.Arc.case_repo')) r.style.display = 'inline-block';
+                        }
+                    }
+                    window.onload = affichage;
+                </script>
+                <label class="labelAff">
+                    Affichage :
+                    <select id="choixaffichage" name="affichage" onchange="affichage()">
+                        {% set defaut0 = "" %}
+                        {% set defaut1 = "" %}
+                        {% set defaut2 = "" %}
+                        {% if session['affichage'] == 0 %}
+                            {% set defaut0 = "selected" %}
+                        {% elif session['affichage'] == 1 %}
+                            {% set defaut1 = "selected" %}
+                        {% elif session['affichage'] == 2 %}
+                            {% set defaut2 = "selected" %}
+                        {% endif %}
+                        <option value="0" {{ defaut0 }} >Normal</option>
+                        <option value="1" {{ defaut1 }} >Archives</option>
+                        <option value="2" {{ defaut2 }} >Tous</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <!-- ---- [ CARDE HAUT : LISTING ] ---- -->
+
+        <!-- FORM : GESTION DES REPOS -->
+        <form action="gestion" method="POST" id="formGestion">
+        <!-- Mémorisation du choix d'affichage courant -->
+        <input id="memoireAffichage" name="memoireAffichage" type="text" hidden>
+        <div id="cadreH">
+            <!-- Affichage des repositories listés -->
+            {% if liste %}
+                {% for repo in liste %}
+                    <div class="{{ repo["statut"][:3] }} case_repo">
+                        <div class="case_repo_entete nowrap">
+                            <a href="{{ repo["url"] }}" target="_blank" title="{{ repo["nom"] }}">
+                                {{ repo["nom"] }}
+                            </a>
+                        </div>
+                        <table class="gesTable" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="gesTd1">Statut</td>
+                                <td class="gesTd2">:</td>
+                                <td class="gesTd3">{{ repo["statut"] }}</td>
+                                <td class="gesTd4" rowspan="2">
+                                    <label>
+                                        <input type="checkbox" class="pointer" name="checkbox" value="{{repo["nom"]}}">
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="gesTd1">Création</td>
+                                <td class="gesTd2">:</td>
+                                <td class="gesTd3">{{ repo["creation"] }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                {% endfor %}
+                <br><br>
+            {% else %}
+                <!-- Si liste vide ou quota d'appels API épuisé -->
+                {% set empty = "(Aucun repository affichable)" %}
+                <div id="empty">{{ empty }}</div>
+            {% endif %}
+        </div>
+
+        <!-- ---- [ CARDE BAS : GESTIONNAIRE ] ---- -->
+
+        <div id="cadreB" class="communGestion marginctr">
+            <div class="souscadreB fleft alleft">
+                <label for="archiver"></label>
+                <input class="scB_radioBtn" type="radio" name="option" id="archiver" value="archiver" checked>
+                  <span class="radioBtnLabel">Archiver la sélection</span>
+                <label for="supprimer"></label>
+                <input class="scB_radioBtn alright" type="radio" name="option" id="supprimer" value="supprimer">
+                  <span class="radioBtnLabel">Supprimer la sélection</span>
+            </div>
+            <div class="souscadreB fright">
+                <input id="btn_submit" class="btn" type="submit" value="Valider">
+            </div>
+        </div>
+        </form>
+
+        <!-- =============================== -->
+    </div>
+
+{% endblock %}

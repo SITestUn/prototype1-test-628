@@ -1,0 +1,52 @@
+{% extends 'default.html' %}
+
+<!-- [ NOM DE PAGE ] -->
+{% set page = "Connexion" %}
+
+{% block content %}
+
+    <!-- ################ [ HEADER ] ################ -->
+
+    <div id="entete">
+        <!-- [ LOGO ] -->
+        <table id="enteTable">
+            <tr><td><div id="flask"></div></td></tr>
+            <tr><td></td></tr>
+        </table>
+        <!-- [ TITRE ] -->
+        <h1>{% block title %}Prototype v1.0{% endblock %}</h1>
+        <!-- [ NOM DE PAGE ] -->
+        <div id="page">{{ page }}</div>
+        <!-- [ ALERTES ] -->
+        <div class="alerte indics">
+            {% if alerte %}
+                {% print(alerte) %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- ################ [ CONTENU ] ################ -->
+
+    <div id="contenu">
+
+        <!-- ======== [ PROGRAMME ] ======== -->
+
+        <div class="vocation indics">
+            Identifiez le compte Github visé à l'aide d'un Access Token.
+        </div>
+
+        <!-- FORMULAIRE -->
+        <form action="login" method="POST" id="FORM_login">
+
+            {% set label = "Github Access Token" %}
+            <input type="text" name="token" placeholder="{{ label }}" required="required">
+            <br><br>
+            <button type="submit" class="">Envoyer</button>
+
+        </form>
+
+        <!-- =============================== -->
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,244 @@
+/* ######## [ GENERALITES ] ######## */
+
+html
+{
+    width: 100vw; height: 100vh;
+    font-family: Consolas, serif; font-size: 1em;
+    background-color: #333F5E; background-image: linear-gradient(#7399c2, #333f5e);
+    background-repeat: no-repeat; background-size: contain;
+}
+
+body
+{
+    min-width: 768px; width: 84%; max-width: 1440px; min-height: 608px; height: 86%;
+    margin: 2em auto 2em auto; padding: 1em 2em 1em 2em; border-radius: 14px;
+    background-color: white; box-shadow: 0.75em 1.25em .4em rgba(0,0,0,0.1);
+}
+
+h1 { font-size: 1.75em; line-height: 1.6em; }
+h3 { line-height: 1.1em; font-size: 1.1em; float: left; }
+
+a         { color: #608ab4; text-decoration: underline; }
+a:hover   { color: #333f5e; text-decoration: none; }
+a:active  { color: #ff0000; text-decoration: none; }
+a:visited { color: #608ab4; text-decoration: underline; }
+
+.btn, button { cursor: pointer; }
+.btn:hover   { opacity: 0.8; }
+#rapport     { width: 91%; text-align: center; margin-top: 2em; color: #608ab4; font-size: 1em; font-style: italic; }
+
+
+/* ######## [ ENTETE ] ######## */
+
+#entete    { height: 5em; border-bottom: red 2px double; padding-bottom: 1.6em; margin-bottom: 1.2em; }
+#enteTitre { display: inline; }
+#enteTable { display: inline; float: right; text-align: right; margin-top: -0.8em; }
+#flask
+{
+    display: block; width: 6em; height: 4em; opacity: 0.25; margin-bottom: 0.8em; float: right;
+    background-image: url("/static/img/logo-un-noir.png"); background-repeat: no-repeat; background-size: contain;
+}
+
+#page
+{
+    min-width: 768px; width: 84%; max-width: 1440px; margin: -1em auto -0.8em auto; position: absolute;
+    font-size: 1.2em; text-shadow: rgba(0,0,0,0.15) 1px 1px; text-align: center;
+}
+.indics    { width: calc(100% - 8em); margin: 1.6em auto 1em auto; text-align: center; }
+.vocation  { font-size: 0.95em; }
+.alerte
+{
+    min-width: 768px; width: 84%; max-width: 1440px; position: absolute; margin-bottom: 1em;
+    line-height: 1px; font-size: 0.95em; font-style: italic; color: red;
+}
+
+.boutonUtil
+{
+    width: 7.5ch; text-align: center; display: inline; padding: 0.25em 0.5em 0.25em 0.5em;
+    border: #e7e7e7 1px outset; border-radius: 4px; box-shadow: 2px 2px 2px rgba(0,0,0,0.125);
+}
+.boutonUtil:hover
+{
+    width: 7.5ch; text-align: center; display: inline; padding: 0.25em 0.5em 0.25em 0.5em; background-color: #fafafa;
+    border: red 1px solid; border-radius: 4px; box-shadow: 2px 2px 2px rgba(0,0,0,0.15);
+}
+.boutonUtil:active
+{
+    width: 7.5ch; text-align: center; display: inline; padding: 0.25em 0.5em 0.25em 0.5em; background-color: white;
+    border: #fafafa 1px outset; border-radius: 4px; box-shadow: 2px 2px 2px rgba(0,0,0,0.125);
+}
+.boutonStandard
+{
+   text-align: center; padding: 0.25em 0.5em 0.25em 0.5em; cursor: pointer;
+    border: lightgray 1px outset; border-radius: 4px; opacity: 1;
+}
+.boutonStandard:hover
+{
+    text-align: center; padding: 0.25em 0.5em 0.25em 0.5em; background-color: #fafafa; cursor: pointer;
+    border: lightgray 1px outset; border-radius: 4px; opacity: 0.8;
+}
+.boutonStandard:active
+{
+    text-align: center; padding: 0.25em 0.5em 0.25em 0.5em; background-color: white; cursor: pointer;
+    border: lightgray 1px outset; border-radius: 4px; opacity: 0.5;
+}
+
+
+/* ######## [ CONTENU ] ######## */
+
+#contenu
+{
+    width: 98%; height: calc(84% - 4.5em); margin: 0 auto 0 auto;
+}
+
+    /* -------- [ Programme : LOGIN ] -------- */
+
+    #FORM_login
+    {
+        min-width: 480px; width: 50%; max-width: 720px; overflow-y: auto;
+        margin: 1.5em auto 1.5em auto; padding: 1.5em 0 1.5em 0; text-align: center;
+        border: #e7e7e7 1px solid; border-radius: 16px;
+    }
+    #FORM_login input { width: 80%; }
+    #logout
+    {
+        width: 100%; position: relative; display: block; float: left; margin-top: -8px;
+        text-align: right; font-size: 0.88em; color: gray;
+    }
+
+    /* --------------------------------------- */
+
+    /* -------- [ Programme : INDEX ] -------- */
+
+    #cadreG
+    {
+        display: inline-block; width: 41.4%; height: 99%;
+        float: left; border-right: #e7e7e7 1px solid; text-align: center;
+    }
+        #cadreG_form { width: 91%; line-height: 4.8em; }
+        #inp_reponom { width: calc(100% - (1em + 2px)); padding: 0; }
+        #inp_reponbr { width: 8ch; }
+        #formTab       { width: 100%; border-collapse: collapse; border-spacing: 0; }
+        .formTab_label { width: calc(100% - 10ch); text-align: justify; color: gray; }
+        .formTab_input { width: 10ch; text-align: right; }
+        .help
+        {
+            display: inline-block; width: 1em; height: 1em; margin-bottom: -2px; cursor: pointer;
+            background-image: url("/static/img/help.png"); background-repeat: no-repeat; background-size: contain;
+        }
+        #inp_nmadmin { width: calc(100% - (1em + 2px)); padding: 0; }
+        #btn_submit  { font-family: "Calibri"; margin-bottom: 1px; }
+
+    #cadreD
+    {
+        display: inline-block; width: 56%; height: 99%;
+        overflow-y: visible; float: right;
+    }
+        #cadreD_list { display: block; width: 100%; height: calc(100% - 4.8em); margin-top: 4.8em; overflow-y: auto; }
+        #table_liste { width: 96%; margin: 0 auto 0 auto; line-height: 2.22em; border-spacing: 0 1px; }
+            #table_liste td { border-bottom: solid 1px #eaeaea; border-top: solid 1px ghostwhite; }
+            .lisTd1
+            {
+                min-width: 20ch; width: calc(100% - 9ch); text-align: left;
+                font-size: 1em; letter-spacing: -0.35px;
+            }
+            .lisTd2
+            {
+                width: 8.8ch; text-align: right;
+                font-size: 0.8em; letter-spacing: -0.35px; font-style: italic;
+            }
+        #empty       { width: 100%; text-align: center; color: gray; font-style: italic; font-size: 1em; }
+        #message     { width: 100%; text-align: center; color: red; font-size: 1em; }
+
+    /* --------------------------------------- */
+
+    /* -------- [ Programme : GESTION ] -------- */
+
+    .communGestion { width: 99%; margin: 0.33% auto 0.33% auto; }
+    #GestEntete { width: 100%; height: 3.8em; text-align: center; display: inline-flex; align-items: center; }
+        .coinDentete
+        {
+            width: 16em; height: 3.8em;
+            display: inline-flex; align-items: baseline;
+        }
+        #div_GEnt
+        {
+            width: calc(100% - 32em); height: 3.5em;
+            text-align: center; vertical-align: middle; line-height: 1.66em;
+        }
+        .titre_GEnt { display: block; line-height: 1.1em; font-size: 1.2em; font-weight: bold; }
+        #messaGEnt  { display: block; width: auto; font-size: 1em; margin-top: 0.33em; }
+        #formGestion { height: calc(98% - 5em); }
+        .labelAff { width: 16em; font-family: Consolas, serif; font-size: 0.9em; color: gray; letter-spacing: -0.66px; }
+
+    #cadreH
+    {
+        width: 99%; height: calc(100% - 5em); margin: 0 auto 0 auto; padding: 1.5em 0 1.5em 0;
+        border-bottom: #e7e7e7 1px solid; border-top: #e7e7e7 1px solid; overflow-y: auto;
+    }
+    .case_repo
+    {
+        min-width: 256px; width: 20%; padding: 1.25em; margin: 0.66em;
+        background-image: linear-gradient(#f6f5f5, #eeeeee); border-radius: 6px;
+        border-left: solid whitesmoke 4px; border-top: solid whitesmoke 4px;
+        border-right: solid #e7e7e7 4px; border-bottom: solid #e7e7e7 4px;
+    }
+        .case_repo_entete { width: 100%; text-shadow: rgba(0,0,0,0.16) 1px 1px; }
+        .gesTable
+        {
+            width: 100%; margin-top: 0.66em; line-height: 1.5em;
+            font-size: 0.88em; color: #9a9999;
+        }
+            .gesTd1       { width: 7.5ch; }
+            .gesTd2       { width: 1em; text-align: center; }
+            .gesTd3       { width: calc(100% - (8ch + 5em)) }
+            .gesTd4       { width: 4em; text-align: center; align-items: center; }
+        .gesTable input[type=checkbox] { transform: scale(1.33); }
+
+    #cadreB { height: 5em; }
+        .souscadreB
+        {
+            width: auto; height: 4em; margin-top: 0.8em;
+            display: inline-flex; align-items: center;
+        }
+        .scB_radioBtn  { margin-left: 2.5em; }
+        .radioBtnLabel { font-family: Consolas, serif; font-size: 0.95em; color: gray; letter-spacing: -0.5px; margin-top: 3px; }
+
+    /* ----------------------------------------- */
+
+
+/* ######## [ LIBRAIRIES ] ######## */
+
+
+.alcenter  { text-align: center; }
+.alleft    { text-align: left; }
+.alright   { text-align: right; }
+.fleft     { float: left; }
+.fright    { float: right; }
+.valignMid { vertical-align: middle; }
+.marginctr { margin: 0 auto 0 auto; }
+
+.nowrap    { white-space: nowrap; overflow: hidden; }
+
+.bold      { font-weight: bold; }
+.tinybold  { text-shadow: rgba(0,0,0,0.15) 1px 1px; }
+.lightbold { text-shadow: rgba(0,0,0,0.4) 1px 1px; }
+.underline { text-decoration: underline; }
+.italic    { font-style: italic; }
+
+.vert      { color: green; }
+.orange    { color: orange; }
+.rouge     { color: red; }
+.bleu      { color: #608ab4; }
+
+.font050   { font-size: 0.50em; }
+.font075   { font-size: 0.75em; }
+.font080   { font-size: 0.80em; }
+
+.LH100     { line-height: 1.00em; }
+.LH125     { line-height: 1.25em; }
+.LH150     { line-height: 1.50em; }
+
+.hoverpacity { opacity: 1; }
+.hoverpacity:hover { opacity: 0.75; }
+.pointer   { cursor: pointer; }
